@@ -321,25 +321,32 @@ public class Workshop {
     }
 
     public String pptls2(String game[]) {
-        //Retornar player ganador o empate
-            /*
-            Rock = R
-            Paper = P
-            Scissors = S
-            Lizard = L
-            Spock = V
-        Scissors cuts Paper
-Paper covers Rock
-Rock crushes Lizard
-Lizard poisons Spock
-Spock smashes Scissors
-Scissors decapitates Lizard
-Lizard eats Paper
-Paper disproves Spock
-Spock vaporizes Rock
-Rock crushes Scissors
-         */
-        return "";
+        String[] opcionesValidas = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
+    boolean jugador1Valido = false;
+    boolean jugador2Valido = false;
+    for (String opcion : opcionesValidas) {
+        if (opcion.equals(eleccionJugador1)) jugador1Valido = true;
+        if (opcion.equals(eleccionJugador2)) jugador2Valido = true;
+    }
+    if (!jugador1Valido || !jugador2Valido) {
+        return "Elección inválida. Opciones: Piedra, Papel, Tijera, Lagarto, Spock";
+    }
+
+    if (eleccionJugador1.equals(eleccionJugador2)) {
+        return "Empate";
+    }
+
+    if (
+        (eleccionJugador1.equals("Piedra")  && (eleccionJugador2.equals("Tijera")  || eleccionJugador2.equals("Lagarto"))) ||
+        (eleccionJugador1.equals("Papel")   && (eleccionJugador2.equals("Piedra")  || eleccionJugador2.equals("Spock")))   ||
+        (eleccionJugador1.equals("Tijera")  && (eleccionJugador2.equals("Papel")   || eleccionJugador2.equals("Lagarto"))) ||
+        (eleccionJugador1.equals("Lagarto") && (eleccionJugador2.equals("Spock")   || eleccionJugador2.equals("Papel")))   ||
+        (eleccionJugador1.equals("Spock")   && (eleccionJugador2.equals("Tijera")  || eleccionJugador2.equals("Piedra")))
+    ) {
+        return "Gana el Jugador 1";
+    }
+
+    return "Gana el Jugador 2";
     }
 
     public double areaCirculo(double radio) {
