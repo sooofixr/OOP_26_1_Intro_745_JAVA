@@ -35,8 +35,7 @@ public class Workshop {
         }
         int resultado = 1;
         for (int i = 1; i <= n; i++) {
-            resultado = resultado * i; // era resultado * 1
-        }
+            resultado = resultado * i;         }
         return resultado;
     }
 
@@ -148,7 +147,7 @@ public class Workshop {
 
     // Método que elimina los duplicados de un arreglo
     public int[] eliminarDuplicados(int[] arreglo) {
-        /int[] temp = new int[arreglo.length];
+        int[] temp = new int[arreglo.length];
         int contador = 0;
         for (int i = 0; i < arreglo.length; i++) {
             boolean repetido = false;
@@ -172,9 +171,17 @@ public class Workshop {
 
     // Método que combina dos arreglos en uno solo
     public int[] combinarArreglos(int[] arreglo1, int[] arreglo2) {
-        // TODO: Implementar el método para combinar dos arreglos en uno solo.
-        // Ejemplo: Si arreglo1 = [1, 2, 3, 4, 5] y arreglo2 = [6, 7, 8], el resultado debería ser [1, 2, 3, 4, 5, 6, 7, 8].
-        return new int[0];
+        int[] resultado = new int[arreglo1.length + arreglo2.length]; 
+        int indice = 0;
+        for (int i = 0; i < arreglo1.length; i++) {
+            resultado[indice] = arreglo1[i];
+            indice++;
+        }
+        for (int i = 0; i < arreglo2.length; i++) {
+            resultado[indice] = arreglo2[i];
+            indice++;
+        }
+        return resultado;
     }
 
     // Método que rota un arreglo n posiciones
