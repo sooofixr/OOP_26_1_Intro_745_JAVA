@@ -41,15 +41,9 @@ public class Workshop {
 
     // Método que verifica si un número es primo
     public boolean esPrimo(int numero) {
-        if (numero <= 1) {
-            return false;
-        }
-        for (int i = 2; i < numero; i++) {
-            if (numero % i == 0) { // solo retorna false si es divisible
-                return false;
-            }
-        }
-        return true;
+        for (int i = 2; i * i <= numero; i++) {
+    if (numero % i == 0) {
+        return false;
     }
 
     // Método que genera una serie de Fibonacci
