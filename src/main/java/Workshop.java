@@ -254,11 +254,7 @@ public class Workshop {
 
     // Método que busca una subcadena en una cadena y retorna su índice
     public int buscarSubcadena(String cadena, String subcadena) {
-        int indice = cadena.indexOf(subcadena);
-    if (indice == -1) {
-        return "Subcadena no encontrada";
-    }
-    return "Encontrada en el índice: " + indice;
+        return cadena.indexOf(subcadena);
     }
 
     // Método que valida un correo electrónico
