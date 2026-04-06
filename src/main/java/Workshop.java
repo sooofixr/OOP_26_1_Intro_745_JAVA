@@ -317,6 +317,8 @@ public class Workshop {
     }
 
     public String pptls2(String game[]) {
+    String eleccionJugador1 = game[0];
+    String eleccionJugador2 = game[1];
         String[] opcionesValidas = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
     boolean jugador1Valido = false;
     boolean jugador2Valido = false;
