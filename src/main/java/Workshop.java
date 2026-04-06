@@ -187,17 +187,17 @@ public class Workshop {
     // Método que rota un arreglo n posiciones
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
         int n = arreglo.length;
-        int[] resultado = new int[n];
-        int indice = 0;
-        for (int i = posiciones; i < n; i++) {
-            resultado[indice] = arreglo[i];
-            indice++;
-        }
-        for (int i = 0; i < posiciones; i++) {
-            resultado[indice] = arreglo[i];
-            indice++;
-        }
-        return resultado;
+    int[] resultado = new int[n];
+    int indice = 0;
+    for (int i = n - posiciones; i < n; i++) {
+        resultado[indice] = arreglo[i];
+        indice++;
+    }
+    for (int i = 0; i < n - posiciones; i++) {
+        resultado[indice] = arreglo[i];
+        indice++;
+    }
+    return resultado;
     }
 
     // Método que cuenta los caracteres en una cadena
