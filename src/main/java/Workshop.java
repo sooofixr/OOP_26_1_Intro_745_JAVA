@@ -206,6 +206,9 @@ public boolean esPrimo(int numero) {
 
     // Método que cuenta los caracteres en una cadena
     public int contarCaracteres(String cadena) {
+        if (cadena == null) {
+            return 0;
+        }
         return cadena.length();
     }
 
@@ -241,14 +244,7 @@ public boolean esPrimo(int numero) {
         if (cadena == null || cadena.trim().isEmpty()) {
             return 0;
         }
-        String[] palabras = cadena.trim().split("[^a-zA-Z0-9ÁÉÍÓÚáéíóúÑñ]+");
-        int contador = 0;
-        for (String palabra : palabras) {
-            if (!palabra.isEmpty()) {
-                contador++;
-            }
-        }
-        return contador;
+        return cadena.trim().split("\\s+").length;
     }
     // Método que convierte una cadena a mayúsculas
     public String convertirAMayusculas(String cadena) {
@@ -308,94 +304,66 @@ public boolean esPrimo(int numero) {
 
     // Método para el juego de piedra, papel, tijera, lagarto, Spock
     public String jugarPiedraPapelTijeraLagartoSpock(String eleccionUsuario) {
-        String[] opciones = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
-
-    int indice = (int)(Math.random() * opciones.length);
-    String eleccionComputadora = opciones[indice];
-
-    String resultado;
-
-    if (eleccionUsuario.equals(eleccionComputadora)) {
-        resultado = "Empate";
-    } else if (
-        (eleccionUsuario.equals("Piedra")  && (eleccionComputadora.equals("Tijera")  || eleccionComputadora.equals("Lagarto"))) ||
-        (eleccionUsuario.equals("Papel")   && (eleccionComputadora.equals("Piedra")  || eleccionComputadora.equals("Spock")))   ||
-        (eleccionUsuario.equals("Tijera")  && (eleccionComputadora.equals("Papel")   || eleccionComputadora.equals("Lagarto"))) ||
-        (eleccionUsuario.equals("Lagarto") && (eleccionComputadora.equals("Spock")   || eleccionComputadora.equals("Papel")))   ||
-        (eleccionUsuario.equals("Spock")   && (eleccionComputadora.equals("Tijera")  || eleccionComputadora.equals("Piedra")))
-    ) {
-        resultado = "Ganaste";
-    } else {
-        resultado = "Perdiste";
+    String[] opciones = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
+    if (eleccionUsuario == null) {
+        return "Elección inválida";
     }
-
-    return "Tu elección: " + eleccionUsuario +
-           " | Computadora: " + eleccionComputadora +
-           " | Resultado: " + resultado;
+    eleccionUsuario = eleccionUsuario.trim();
+    boolean valida = false;
+    for (String opcion : opciones) {
+        if (opcion.equalsIgnoreCase(eleccionUsuario)) {
+            eleccionUsuario = opcion;
+            valida = true;
+            break;
+        }
     }
+    if (!valida) {
+        return "Elección inválida";
+    }
+    int indice = (int) (Math.random() * opciones.length);
+    String computadora = opciones[indice];
 
+    if (eleccionUsuario.equals(computadora)) {
+        return "Empate";
+    }
+    boolean gana =
+        (eleccionUsuario.equals("Piedra") && (computadora.equals("Tijera") || computadora.equals("Lagarto"))) ||
+        (eleccionUsuario.equals("Papel") && (computadora.equals("Piedra") || computadora.equals("Spock"))) ||
+        (eleccionUsuario.equals("Tijera") && (computadora.equals("Papel") || computadora.equals("Lagarto"))) ||
+        (eleccionUsuario.equals("Lagarto") && (computadora.equals("Spock") || computadora.equals("Papel"))) ||
+        (eleccionUsuario.equals("Spock") && (computadora.equals("Tijera") || computadora.equals("Piedra")));
+    return gana ? "Ganaste" : "Perdiste";
+}
+    
     public String pptls2(String[] game) {
-    String eleccionJugador1 = normalizarOpcion(game[0]);
-    String eleccionJugador2 = normalizarOpcion(game[1]);
-
-    if (eleccionJugador1 == null || eleccionJugador2 == null) {
-        return "Invalid Option";
+    if (game == null || game.length < 2) {
+        return "Elección inválida";
     }
-
-    if (eleccionJugador1.equals(eleccionJugador2)) {
-        return "Tie";
+    String jugador1 = normalizarOpcion(game[0]);
+    String jugador2 = normalizarOpcion(game[1]);
+    if (jugador1 == null || jugador2 == null) {
+        return "Elección inválida";
     }
-
-    if (
-        (eleccionJugador1.equals("piedra") && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("lagarto"))) ||
-        (eleccionJugador1.equals("papel") && (eleccionJugador2.equals("piedra") || eleccionJugador2.equals("spock"))) ||
-        (eleccionJugador1.equals("tijera") && (eleccionJugador2.equals("papel") || eleccionJugador2.equals("lagarto"))) ||
-        (eleccionJugador1.equals("lagarto") && (eleccionJugador2.equals("spock") || eleccionJugador2.equals("papel"))) ||
-        (eleccionJugador1.equals("spock") && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("piedra")))
-    ) {
-        return "Player 1";
+    if (jugador1.equals(jugador2)) {
+        return "Empate";
     }
-
-    return "Player 2";
+    boolean ganaJugador1 =
+        (jugador1.equals("piedra") && (jugador2.equals("tijera") || jugador2.equals("lagarto"))) ||
+        (jugador1.equals("papel") && (jugador2.equals("piedra") || jugador2.equals("spock"))) ||
+        (jugador1.equals("tijera") && (jugador2.equals("papel") || jugador2.equals("lagarto"))) ||
+        (jugador1.equals("lagarto") && (jugador2.equals("spock") || jugador2.equals("papel"))) ||
+        (jugador1.equals("spock") && (jugador2.equals("tijera") || jugador2.equals("piedra")));
+    return ganaJugador1 ? "Player 1" : "Player 2";
 }
-
-private String normalizarOpcion(String opcion) {
-    if (opcion == null) {
-        return null;
-    }
-
-    opcion = opcion.trim().toLowerCase();
-
-    switch (opcion) {
-        case "piedra":
-        case "rock":
-            return "piedra";
-        case "papel":
-        case "paper":
-            return "papel";
-        case "tijera":
-        case "scissors":
-        case "scissor":
-            return "tijera";
-        case "lagarto":
-        case "lizard":
-            return "lagarto";
-        case "spock":
-            return "spock";
-        default:
-            return null;
-    }
-}
-
+    
     public double areaCirculo(double radio) {
         return Math.PI * radio * radio;
     }
-
+    
     public String zoodiac(int day, int month) {
     if (month < 1 || month > 12 || day < 1 || day > 31) {
         return "Invalid Date";
     }
-
     if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
         return "Invalid Date";
     }
