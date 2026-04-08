@@ -335,19 +335,10 @@ public boolean esPrimo(int numero) {
     }
 
     public String pptls2(String[] game) {
-    String eleccionJugador1 = game[0].trim().toLowerCase();
-    String eleccionJugador2 = game[1].trim().toLowerCase();
+    String eleccionJugador1 = normalizarOpcion(game[0]);
+    String eleccionJugador2 = normalizarOpcion(game[1]);
 
-    String[] opcionesValidas = {"piedra", "papel", "tijera", "lagarto", "spock"};
-    boolean jugador1Valido = false;
-    boolean jugador2Valido = false;
-
-    for (String opcion : opcionesValidas) {
-        if (opcion.equals(eleccionJugador1)) jugador1Valido = true;
-        if (opcion.equals(eleccionJugador2)) jugador2Valido = true;
-    }
-
-    if (!jugador1Valido || !jugador2Valido) {
+    if (eleccionJugador1 == null || eleccionJugador2 == null) {
         return "Invalid Option";
     }
 
@@ -356,16 +347,44 @@ public boolean esPrimo(int numero) {
     }
 
     if (
-        (eleccionJugador1.equals("piedra")  && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("lagarto"))) ||
-        (eleccionJugador1.equals("papel")   && (eleccionJugador2.equals("piedra") || eleccionJugador2.equals("spock"))) ||
-        (eleccionJugador1.equals("tijera")  && (eleccionJugador2.equals("papel") || eleccionJugador2.equals("lagarto"))) ||
+        (eleccionJugador1.equals("piedra") && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("lagarto"))) ||
+        (eleccionJugador1.equals("papel") && (eleccionJugador2.equals("piedra") || eleccionJugador2.equals("spock"))) ||
+        (eleccionJugador1.equals("tijera") && (eleccionJugador2.equals("papel") || eleccionJugador2.equals("lagarto"))) ||
         (eleccionJugador1.equals("lagarto") && (eleccionJugador2.equals("spock") || eleccionJugador2.equals("papel"))) ||
-        (eleccionJugador1.equals("spock")   && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("piedra")))
+        (eleccionJugador1.equals("spock") && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("piedra")))
     ) {
         return "Player 1";
     }
 
     return "Player 2";
+}
+
+private String normalizarOpcion(String opcion) {
+    if (opcion == null) {
+        return null;
+    }
+
+    opcion = opcion.trim().toLowerCase();
+
+    switch (opcion) {
+        case "piedra":
+        case "rock":
+            return "piedra";
+        case "papel":
+        case "paper":
+            return "papel";
+        case "tijera":
+        case "scissors":
+        case "scissor":
+            return "tijera";
+        case "lagarto":
+        case "lizard":
+            return "lagarto";
+        case "spock":
+            return "spock";
+        default:
+            return null;
+    }
 }
 
     public double areaCirculo(double radio) {
