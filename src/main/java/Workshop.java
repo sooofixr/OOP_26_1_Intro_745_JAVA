@@ -45,7 +45,7 @@ public class Workshop {
     if (numero % i == 0) {
         return false;
     }
-
+        }
     // Método que genera una serie de Fibonacci
     public int[] serieFibonacci(int n) {
         if (n < 0) {
