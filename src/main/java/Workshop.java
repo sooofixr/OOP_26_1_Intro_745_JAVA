@@ -186,18 +186,23 @@ public boolean esPrimo(int numero) {
     // Método que rota un arreglo n posiciones
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
         int n = arreglo.length;
-    int[] resultado = new int[n];
-    int indice = 0;
-    for (int i = n - posiciones; i < n; i++) {
-        resultado[indice] = arreglo[i];
-        indice++;
-    }
-    for (int i = 0; i < n - posiciones; i++) {
-        resultado[indice] = arreglo[i];
-        indice++;
-    }
-    return resultado;
-    }
+        if (n == 0) {
+        return arreglo;
+        }
+
+        posiciones = posiciones % n;
+        if (posiciones < 0) {
+        posiciones += n;
+        }
+
+        int[] resultado = new int[n];
+
+        for (int i = 0; i < n; i++) {
+        resultado[(i + posiciones) % n] = arreglo[i];
+        }
+
+        return resultado;
+}
 
     // Método que cuenta los caracteres en una cadena
     public int contarCaracteres(String cadena) {
@@ -279,6 +284,9 @@ public boolean esPrimo(int numero) {
 
     // Método que convierte un número en su representación binaria
     public String convertirABinario(int numero) {
+        if (numero < 0) {
+            return "-" + Integer.toBinaryString(-numero);
+        }
         return Integer.toBinaryString(numero);
     }
 
