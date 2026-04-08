@@ -241,9 +241,15 @@ public boolean esPrimo(int numero) {
         if (cadena == null || cadena.trim().isEmpty()) {
             return 0;
         }
-        return cadena.trim().split("\\s+").length;
+        String[] palabras = cadena.trim().split("[^a-zA-Z0-9ÁÉÍÓÚáéíóúÑñ]+");
+        int contador = 0;
+        for (String palabra : palabras) {
+            if (!palabra.isEmpty()) {
+                contador++;
+            }
+        }
+        return contador;
     }
-
     // Método que convierte una cadena a mayúsculas
     public String convertirAMayusculas(String cadena) {
         return cadena.toUpperCase();
