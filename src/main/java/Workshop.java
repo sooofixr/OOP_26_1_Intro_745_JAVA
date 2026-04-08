@@ -40,14 +40,17 @@ public class Workshop {
     }
 
     // Método que verifica si un número es primo
-    public boolean esPrimo(int numero) {
-        for (int i = 2; i * i <= numero; i++) {
-    if (numero % i == 0) {
+public boolean esPrimo(int numero) {
+    if (numero <= 1) {
         return false;
-        }
-        }
-        return true;
     }
+    for (int i = 2; i * i <= numero; i++) {
+        if (numero % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
     // Método que genera una serie de Fibonacci
     public int[] serieFibonacci(int n) {
         if (n < 0) {
