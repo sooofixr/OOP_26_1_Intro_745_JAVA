@@ -211,7 +211,25 @@ public boolean esPrimo(int numero) {
 
     // Método que invierte una cadena
     public String invertirCadena(String cadena) {
-    return new StringBuilder(cadena).reverse().toString();
+    char[] chars = cadena.toCharArray();
+    int izquierda = 0;
+    int derecha = chars.length - 1;
+
+    while (izquierda < derecha) {
+        if (!Character.isLetterOrDigit(chars[izquierda])) {
+            izquierda++;
+        } else if (!Character.isLetterOrDigit(chars[derecha])) {
+            derecha--;
+        } else {
+            char temp = chars[izquierda];
+            chars[izquierda] = chars[derecha];
+            chars[derecha] = temp;
+            izquierda++;
+            derecha--;
+        }
+    }
+
+    return new String(chars);
 }
 
     // Método que verifica si una cadena es un palíndromo
