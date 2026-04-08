@@ -211,26 +211,24 @@ public boolean esPrimo(int numero) {
 
     // Método que invierte una cadena
     public String invertirCadena(String cadena) {
-    char[] chars = cadena.toCharArray();
-    int izquierda = 0;
-    int derecha = chars.length - 1;
-
-    while (izquierda < derecha) {
-        if (!Character.isLetterOrDigit(chars[izquierda])) {
-            izquierda++;
-        } else if (!Character.isLetterOrDigit(chars[derecha])) {
-            derecha--;
-        } else {
-            char temp = chars[izquierda];
-            chars[izquierda] = chars[derecha];
-            chars[derecha] = temp;
-            izquierda++;
-            derecha--;
+        char[] chars = cadena.toCharArray();
+        int izquierda = 0;
+        int derecha = chars.length - 1;
+        while (izquierda < derecha) {
+            if (!Character.isLetterOrDigit(chars[izquierda])) {
+                izquierda++;
+            } else if (!Character.isLetterOrDigit(chars[derecha])) {
+                derecha--;
+            } else {
+                char temp = chars[izquierda];
+                chars[izquierda] = chars[derecha];
+                chars[derecha] = temp;
+                izquierda++;
+                derecha--;
+            }
         }
+        return new String(chars);
     }
-
-    return new String(chars);
-}
 
     // Método que verifica si una cadena es un palíndromo
     public boolean esPalindromo(String cadena) {
@@ -259,14 +257,7 @@ public boolean esPrimo(int numero) {
         if (cadena == null || cadena.trim().isEmpty()) {
             return 0;
         }
-        String[] palabras = cadena.trim().split("[\\s\\p{Punct}]+");
-        int contador = 0;
-        for (String palabra : palabras) {
-            if (!palabra.isEmpty()) {
-                contador++;
-            }
-        }
-        return contador;
+        return cadena.trim().split("\\s+").length;
     }
 
     // Método que convierte una cadena a mayúsculas
