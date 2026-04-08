@@ -44,8 +44,10 @@ public class Workshop {
         for (int i = 2; i * i <= numero; i++) {
     if (numero % i == 0) {
         return false;
-    }
         }
+        }
+        return true;
+    }
     // Método que genera una serie de Fibonacci
     public int[] serieFibonacci(int n) {
         if (n < 0) {
