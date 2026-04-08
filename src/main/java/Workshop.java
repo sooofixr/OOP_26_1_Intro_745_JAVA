@@ -339,9 +339,16 @@ public boolean esPrimo(int numero) {
     if (game == null || game.length < 2) {
         return "Elección inválida";
     }
-    String jugador1 = normalizarOpcion(game[0]);
-    String jugador2 = normalizarOpcion(game[1]);
-    if (jugador1 == null || jugador2 == null) {
+    String jugador1 = game[0].trim().toLowerCase();
+    String jugador2 = game[1].trim().toLowerCase();
+    String[] validas = {"piedra", "papel", "tijera", "lagarto", "spock"};
+    boolean valido1 = false;
+    boolean valido2 = false;
+    for (String op : validas) {
+        if (op.equals(jugador1)) valido1 = true;
+        if (op.equals(jugador2)) valido2 = true;
+    }
+    if (!valido1 || !valido2) {
         return "Elección inválida";
     }
     if (jugador1.equals(jugador2)) {
