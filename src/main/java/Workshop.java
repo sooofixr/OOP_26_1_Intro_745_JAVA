@@ -220,15 +220,23 @@ public boolean esPrimo(int numero) {
 
     // Método que verifica si una cadena es un palíndromo
     public boolean esPalindromo(String cadena) {
+        if (cadena == null) {
+            return false;
+        }
+
+         String limpia = cadena.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
         int izquierda = 0;
-        int derecha = cadena.length() - 1;
+        int derecha = limpia.length() - 1;
+
         while (izquierda < derecha) {
-            if (cadena.charAt(izquierda) != cadena.charAt(derecha)) {
+            if (limpia.charAt(izquierda) != limpia.charAt(derecha)) {
                 return false;
             }
             izquierda++;
             derecha--;
         }
+
         return true;
     }
 
@@ -237,8 +245,14 @@ public boolean esPrimo(int numero) {
         if (cadena == null || cadena.trim().isEmpty()) {
             return 0;
         }
-        String[] palabras = cadena.split("\\s+"); 
-        return palabras.length;
+        String[] palabras = cadena.trim().split("[\\s\\p{Punct}]+");
+        int contador = 0;
+        for (String palabra : palabras) {
+            if (!palabra.isEmpty()) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
     // Método que convierte una cadena a mayúsculas
@@ -326,36 +340,39 @@ public boolean esPrimo(int numero) {
            " | Resultado: " + resultado;
     }
 
-    public String pptls2(String game[]) {
-    String eleccionJugador1 = game[0];
-    String eleccionJugador2 = game[1];
-        String[] opcionesValidas = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
+    public String pptls2(String[] game) {
+    String eleccionJugador1 = game[0].trim().toLowerCase();
+    String eleccionJugador2 = game[1].trim().toLowerCase();
+
+    String[] opcionesValidas = {"piedra", "papel", "tijera", "lagarto", "spock"};
     boolean jugador1Valido = false;
     boolean jugador2Valido = false;
+
     for (String opcion : opcionesValidas) {
         if (opcion.equals(eleccionJugador1)) jugador1Valido = true;
         if (opcion.equals(eleccionJugador2)) jugador2Valido = true;
     }
+
     if (!jugador1Valido || !jugador2Valido) {
-        return "Elección inválida. Opciones: Piedra, Papel, Tijera, Lagarto, Spock";
+        return "Invalid Option";
     }
 
     if (eleccionJugador1.equals(eleccionJugador2)) {
-        return "Empate";
+        return "Tie";
     }
 
     if (
-        (eleccionJugador1.equals("Piedra")  && (eleccionJugador2.equals("Tijera")  || eleccionJugador2.equals("Lagarto"))) ||
-        (eleccionJugador1.equals("Papel")   && (eleccionJugador2.equals("Piedra")  || eleccionJugador2.equals("Spock")))   ||
-        (eleccionJugador1.equals("Tijera")  && (eleccionJugador2.equals("Papel")   || eleccionJugador2.equals("Lagarto"))) ||
-        (eleccionJugador1.equals("Lagarto") && (eleccionJugador2.equals("Spock")   || eleccionJugador2.equals("Papel")))   ||
-        (eleccionJugador1.equals("Spock")   && (eleccionJugador2.equals("Tijera")  || eleccionJugador2.equals("Piedra")))
+        (eleccionJugador1.equals("piedra")  && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("lagarto"))) ||
+        (eleccionJugador1.equals("papel")   && (eleccionJugador2.equals("piedra") || eleccionJugador2.equals("spock"))) ||
+        (eleccionJugador1.equals("tijera")  && (eleccionJugador2.equals("papel") || eleccionJugador2.equals("lagarto"))) ||
+        (eleccionJugador1.equals("lagarto") && (eleccionJugador2.equals("spock") || eleccionJugador2.equals("papel"))) ||
+        (eleccionJugador1.equals("spock")   && (eleccionJugador2.equals("tijera") || eleccionJugador2.equals("piedra")))
     ) {
-        return "Gana el Jugador 1";
+        return "Player 1";
     }
 
-    return "Gana el Jugador 2";
-    }
+    return "Player 2";
+}
 
     public double areaCirculo(double radio) {
         return Math.PI * radio * radio;
