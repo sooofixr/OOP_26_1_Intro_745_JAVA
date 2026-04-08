@@ -273,12 +273,11 @@ public boolean esPrimo(int numero) {
 
     // Método que valida un correo electrónico
     public boolean validarCorreoElectronico(String correo) {
-        if (correo == null) return false;
-        int arroba = correo.indexOf("@"); 
-        int punto = correo.lastIndexOf(".");
-        return arroba > 0 && punto > arroba;
+        if (correo == null) {
+            return false;
+        }
+        return correo.matches("^[A-Za-z0-9._+-]+@[A-Za-z0-9-]+\\.[A-Za-z]{2,}$");
     }
-
     // Método que calcula el promedio de una lista de números
 
     public double promedioLista(List<Integer> lista) {
@@ -392,7 +391,7 @@ public boolean esPrimo(int numero) {
     } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
         return "Tauro";
     } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
-        return "Geminis";
+        return "Gemini";
     } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
         return "Cancer";
     } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
