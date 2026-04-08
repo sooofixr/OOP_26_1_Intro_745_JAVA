@@ -291,7 +291,10 @@ public boolean esPrimo(int numero) {
     }
 
     // Método que convierte un número en su representación hexadecimal
-    public String convertirAHexadecimal(int numero) {
+   public String convertirAHexadecimal(int numero) {
+        if (numero < 0) {
+            return "-" + Integer.toHexString(-numero).toUpperCase();
+        }
         return Integer.toHexString(numero).toUpperCase();
     }
 
